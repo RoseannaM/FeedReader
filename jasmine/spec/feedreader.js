@@ -21,14 +21,11 @@ $(function() {
          * allFeeds in app.js to be an empty array and refresh the
          * page?
          */
-        it('are defined', function() {
+        it( 'are defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
 
-
-         /* in the allFeeds object and ensures it has a URL defined
-         * and that the URL is not empty.*/
 
         it('Urls are defined', function() {
             allFeeds.forEach(function(feed) {
@@ -38,10 +35,6 @@ $(function() {
 
         });
 
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
-         */
         it('Names are defined', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
@@ -51,17 +44,9 @@ $(function() {
         });
     });
 
-
-    /* TODO: Write a new test suite named "The menu" */
     describe('The Menu', function() {
 
-        /* TODO: Write a test that ensures the menu element is
-         * hidden by default. You'll have to analyze the HTML and
-         * the CSS to determine how we're performing the
-         * hiding/showing of the menu element.
-         */
-        it('menu is hidden', function() {
-            /*expect($('body')).toHaveClass('menu-hidden');*/
+        it('is hidden', function() {
             expect($('body')).toHaveClass('menu-hidden');
         });
 
@@ -70,11 +55,18 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+        it(' is visible onClick', function() {
+            $('.menu-icon-link').trigger('click');
+            expect($('body')).toHaveClass('');
 
+            $('.menu-icon-link').trigger('click');
+            expect($('body')).toHaveClass('menu-hidden');
+        });
     });
 
 
     /* TODO: Write a new test suite named "Initial Entries" */
+    describe('Initial Entries', function () {
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -82,6 +74,26 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+
+        beforeEach(function (done) {
+            loadFeed(0, function () {
+                done();
+            });
+        });
+
+        it('are loaded and visible', function (done) {
+            var Entries =  $(".feed, .entry").length;
+            /*expect(Entries).toBeGreaterThan(0);
+            OR expect($(".feed, .entry").length).toBeGreaterThan(0);
+            */
+            /*expect($('a')).toHaveClass('.entry-link');*/
+            expect(Entries).toBeGreaterThan(0);
+            done();
+        });
+
+
+
+    });
 
     /* TODO: Write a new test suite named "New Feed Selection"
 
