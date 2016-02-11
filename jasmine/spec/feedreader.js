@@ -40,7 +40,7 @@ $(function () {
         it(' is visible onClick', function () {
             $('.menu-icon-link').trigger('click');
             expect($('body')).not.toHaveClass('menu-hidden');
-        //Checks that the menu-hidden class is toggled on
+            //Checks that the menu-hidden class is toggled on
             $('.menu-icon-link').trigger('click');
             expect($('body')).toHaveClass('menu-hidden');
         });
@@ -58,8 +58,8 @@ $(function () {
 
         //Checks that loadFeed adds at least one .entry element to the .feed container
         it('are loaded and visible', function (done) {
-            var Entries = $(".feed, .entry").length;
-            expect(Entries).toBeGreaterThan(0);
+            var entries = $(".feed .entry").length;
+            expect(entries).toBeGreaterThan(0);
             done();
         });
     });
@@ -80,8 +80,7 @@ $(function () {
 
         //Checks that the initial feed HTML has changed
         it('is loaded and changes', function (done) {
-            loadFeed(1, function() {
-                /*expect(feedHtml).not.toEqual($('.feed').html());*/
+            loadFeed(1, function () {
                 expect($('.feed').html()).not.toEqual(feedHtml);
                 done();
             });
