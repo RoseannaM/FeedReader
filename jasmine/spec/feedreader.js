@@ -39,7 +39,7 @@ $(function () {
         //Checks that the menu-hidden class is toggled off
         it(' is visible onClick', function () {
             $('.menu-icon-link').trigger('click');
-            expect($('body')).toHaveClass('');
+            expect($('body')).not.toHaveClass('menu-hidden');
         //Checks that the menu-hidden class is toggled on
             $('.menu-icon-link').trigger('click');
             expect($('body')).toHaveClass('menu-hidden');
@@ -73,15 +73,18 @@ $(function () {
         //Checks that the data is loaded before proceeding
         beforeEach(function (done) {
             loadFeed(0, function () {
+                feedHtml = $('.feed').html();
                 done();
             });
         });
 
         //Checks that the initial feed HTML has changed
         it('is loaded and changes', function (done) {
-            loadFeed(1);
-            expect($('.feed').html()).not.toEqual(feedHtml);
-            done();
+            loadFeed(1, function() {
+                /*expect(feedHtml).not.toEqual($('.feed').html());*/
+                expect($('.feed').html()).not.toEqual(feedHtml);
+                done();
+            });
         });
     });
 }());
